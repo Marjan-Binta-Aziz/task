@@ -1,3 +1,4 @@
+import { faFacebook, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faQuestionCircle, faAngleRight, faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import React, { useEffect, useState } from "react";
 const Page1 = () => {
     const [pics, setPics] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [shareModal, setShareModal] = useState(false);
 
     useEffect(()=> {
         fetch('data.json')
@@ -61,7 +63,7 @@ const Page1 = () => {
             <h1 className="my-3">Completed by 21 learners</h1>
             <label onClick={() => setShowModal(true)} type="button" htmlFor="my-modal-4" className="btn rounded-full btn-secondary mr-4 text-white capitalize">See Class Schedule <FontAwesomeIcon className="ml-2" icon={faAngleRight}/> </label>
             <button className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faHeart}/>Save </button>
-            <button  className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faShare}/>Share </button>
+            <label onClick={() => setShareModal(true)} type="button" htmlFor="modal-2" className="cursor-pointer rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faShare}/>Share </label>
             </div>
             <div className="grid grid-cols-2 p-16 gap-3">
             <div className="w-full rounded ">
@@ -102,6 +104,24 @@ const Page1 = () => {
                 </>
             ) : null
         }
+        {
+            shareModal ? (
+            <>
+            <input type="checkbox" id="modal-2" className="modal-toggle" />
+            <label htmlFor="modal-2" className="modal cursor-pointer">
+            <label className="modal-box relative" htmlFor="modal-2">
+                <h3 className="text-lg font-bold mb-3">Share</h3>
+                <a className='mx-5' target='_blank' href="https://github.com/Marjan-Binta-Aziz" rel="noreferrer"><FontAwesomeIcon icon={faGithub}/> GitHub</a>
+                <a className='mx-5' target='_blank' href="https://www.facebook.com/share" rel="noreferrer"><FontAwesomeIcon icon={faFacebook}/> Facebook</a>
+                <a className='mx-5' target='_blank' href="https://www.linkedin.com/feed/?shareActive=true" rel="noreferrer"><FontAwesomeIcon icon={faLinkedin}/> LinkedIn</a>
+                <br />
+                <button onClick={() => setShareModal(false)} className='btn btn-sm rounded-full btn-secondary mt-4 text-white'>Cancel</button>
+            </label>
+            </label>
+            </>
+            ) : null
+        }
+
         </div>
     );
 };
