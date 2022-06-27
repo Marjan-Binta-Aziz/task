@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 
 const Page1 = () => {
     const [pics, setPics] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+
     useEffect(()=> {
         fetch('data.json')
         .then(res => res.json())
@@ -27,43 +29,43 @@ const Page1 = () => {
         </div>
         { 
         pics.map(pic => 
-        <div key={pic._id} className="container mx-auto grid grid-cols-2 p-10 justify-center items-center">
+        <div key={pic._id} className="container mx-auto grid grid-cols-2 p-10 justify-center items-center w-fit">
             <div className="text-left">
             <h1>{pic.description}</h1>
-            <div class="avatar py-3">
-                <div class="w-7 rounded-full">
-                <img src="https://api.lorem.space/image/face?hash=92310" alt=""/>
+            <div className="avatar py-3 pt-6">
+                <div className="w-7 rounded-full">
+                <img src={pic.teacherImg} alt=""/>
                 </div>
-                <h2 className="font-bold text-blue-600 ml-2">Kimberly R Moseler</h2>
+                <h2 className="font-bold text-blue-600 ml-2">{pic.teacherName}</h2>
             </div>
             <div className="flex items-center gap-2">
-            <div class="rating rating-xs">
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"  />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" checked/>
+            <div className="rating rating-xs">
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400"  />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" checked/>
             </div>
             <h2 className="text-sm">467 total reviews for this teacher</h2>
             </div>
-            <div className="flex items-center gap-2">
-            <div class="rating rating-xs">
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400"  />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" />
-                <input type="radio" name="rating-5" class="mask mask-star-2 bg-orange-400" checked/>
+            <div className="flex items-center gap-2 mb-5">
+            <div className="rating rating-xs">
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400"  />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" checked/>
             </div>
             <h2 className="text-sm">5  reviews for this class</h2>
             </div>
-            <h1>Completed by 21 learners</h1>
-            <button class="btn rounded-full btn-secondary my-4 text-white capitalize">See Class Schedule <FontAwesomeIcon className="ml-2" icon={faAngleRight}/> </button>
-            <button class="rounded-full bg-transparent my-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faHeart}/>Save </button>
-            <button class="rounded-full bg-transparent my-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faShare}/>Share </button>
+            <h1 className="my-3">Completed by 21 learners</h1>
+            <label onClick={() => setShowModal(true)} type="button" htmlFor="my-modal-4" className="btn rounded-full btn-secondary mr-4 text-white capitalize">See Class Schedule <FontAwesomeIcon className="ml-2" icon={faAngleRight}/> </label>
+            <button className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faHeart}/>Save </button>
+            <button  className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faShare}/>Share </button>
             </div>
             <div className="grid grid-cols-2 p-5 gap-3">
-            <div className="rounded ">
-                <img className="w-full h-full" 
+            <div className="w-full rounded ">
+                <img className="h-full" 
                 src={pic.img1}
                 alt=""
                 />
@@ -76,7 +78,7 @@ const Page1 = () => {
                 />
             </div>
             <div className="w-full rounded">
-                <img className="w-full" 
+                <img className="h-full" 
                 src={pic.img3}
                 alt=""
                 />
@@ -85,6 +87,20 @@ const Page1 = () => {
             </div>
         </div>
         )
+        }
+        {
+            showModal ? (
+                <>
+            <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+            <label htmlFor="my-modal-4" className="modal cursor-pointer">
+            <label className="modal-box relative" htmlFor="my-modal-4">
+                <h3 className="text-lg font-bold">Hello Students!</h3>
+                <p className="py-4">Class Schedule will be coming soon!</p>
+                <button onClick={() => setShowModal(false)} className='btn rounded-full btn-secondary text-white'>Okay</button>
+            </label>
+            </label>
+                </>
+            ) : null
         }
         </div>
     );
