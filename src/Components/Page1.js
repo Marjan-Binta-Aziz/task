@@ -29,7 +29,7 @@ const Page1 = () => {
         </div>
         { 
         pics.map(pic => 
-        <div key={pic._id} className="container mx-auto grid grid-cols-2 p-10 justify-center items-center w-fit">
+        <div key={pic._id} className="container mx-auto grid grid-cols-2 px-10 justify-center items-center w-fit">
             <div className="text-left">
             <h1>{pic.description}</h1>
             <div className="avatar py-3 pt-6">
@@ -63,7 +63,7 @@ const Page1 = () => {
             <button className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faHeart}/>Save </button>
             <button  className="rounded-full bg-transparent mr-4 text-secondary capitalize"><FontAwesomeIcon className="mx-2" icon={faShare}/>Share </button>
             </div>
-            <div className="grid grid-cols-2 p-5 gap-3">
+            <div className="grid grid-cols-2 p-16 gap-3">
             <div className="w-full rounded ">
                 <img className="h-full" 
                 src={pic.img1}
